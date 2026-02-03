@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>Sign Up | Networking Academy with Cisco</title>
+    <style>
+        :root {
+            --cui-color-sky: #00bceb;
+            --cui-color-midnight: #0d274d;
+            --cui-background-gray: #f0f2f5; /* Сивкав фон точно като оригинала */
+            --cui-font-stack: "CiscoSans", "Helvetica Neue", Arial, sans-serif;
+        }
+
+        body { 
+            font-family: var(--cui-font-stack); 
+            margin: 0; 
+            padding: 0;
+            background: #ffffff; 
+            display: flex;
+            flex-direction: row;
+            min-height: 100vh;
+        }
+
+        /* Адаптивност за мобилни телефони */
+        @media (max-width: 768px) {
+            body { flex-direction: column; overflow-y: auto; }
+            .banner-side { padding: 40px 20px !important; min-height: auto !important; }
+            .form-side { padding: 20px !important; }
+        }
+
+        /* Лява секция */
+        .banner-side { 
+            flex: 1.2; 
+            background-color: var(--cui-background-gray);
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            justify-content: center;
+            text-align: center; 
+            padding: 60px;
+            min-height: 100vh;
+        }
+
+        .banner-image {
+            max-width: 80%;
+            height: auto;
+            margin-top: 30px;
+            mix-blend-mode: multiply; /* Помага на картинката да се слее с фона */
+        }
+
+        .banner-side h2 { 
+            font-weight: 300; font-size: 28px; color: var(--cui-color-midnight);
+            margin: 0 0 15px 0;
+        }
+
+        .banner-side p { 
+            font-size: 16px; color: #4a4a4a; max-width: 85%; line-height: 1.5;
+        }
+
+        /* Дясна секция */
+        .form-side { 
+            flex: 1; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            padding: 40px; 
+        }
+
+        .content-box { width: 100%; max-width: 400px; }
+
+        .nav-header { display: flex; justify-content: space-between; font-size: 13px; color: #666; margin-bottom: 40px; }
+
+        h1 { font-size: 32px; font-weight: 400; margin: 0 0 10px 0; color: var(--cui-color-midnight); }
+        .sub-text { color: #666; font-size: 14px; margin-bottom: 30px; }
+
+        label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 8px; color: #333; }
+        
+        select, .custom-input { 
+            width: 100%; padding: 12px; margin-bottom: 20px; 
+            border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;
+        }
+
+        .btn-continue { 
+            width: 100
