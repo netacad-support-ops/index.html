@@ -6,80 +6,163 @@
     <title>Sign Up | Networking Academy with Cisco</title>
     <style>
         :root {
-            --cui-color-sky: #00bceb;
-            --cui-color-midnight: #0d274d;
-            --cui-background-gray: #f0f2f5; /* Сивкав фон точно като оригинала */
-            --cui-font-stack: "CiscoSans", "Helvetica Neue", Arial, sans-serif;
+            --cisco-blue-btn: #447294;
+            --cisco-midnight: #0d274d;
+            --cisco-bg-banner: #f0f7fa;
+            --cisco-text-gray: #6c757d;
         }
 
         body { 
-            font-family: var(--cui-font-stack); 
+            font-family: "CiscoSans", "Arial", sans-serif; 
             margin: 0; 
-            padding: 0;
-            background: #ffffff; 
-            display: flex;
-            flex-direction: row;
+            display: flex; 
             min-height: 100vh;
+            background: #ffffff;
         }
 
-        /* Адаптивност за мобилни телефони */
-        @media (max-width: 768px) {
+        @media (max-width: 992px) {
             body { flex-direction: column; overflow-y: auto; }
-            .banner-side { padding: 40px 20px !important; min-height: auto !important; }
-            .form-side { padding: 20px !important; }
+            .banner-side { min-height: 350px !important; padding: 20px !important; }
         }
 
-        /* Лява секция */
         .banner-side { 
             flex: 1.2; 
-            background-color: var(--cui-background-gray);
+            background-color: var(--cisco-bg-banner); 
             display: flex; 
             flex-direction: column; 
             align-items: center; 
             justify-content: center;
             text-align: center; 
-            padding: 60px;
-            min-height: 100vh;
-        }
-
-        .banner-image {
-            max-width: 80%;
-            height: auto;
-            margin-top: 30px;
-            mix-blend-mode: multiply; /* Помага на картинката да се слее с фона */
+            padding: 40px;
         }
 
         .banner-side h2 { 
-            font-weight: 300; font-size: 28px; color: var(--cui-color-midnight);
-            margin: 0 0 15px 0;
+            font-weight: 300; font-size: 30px; color: var(--cisco-midnight);
+            margin: 0 0 15px 0; line-height: 1.2;
         }
 
         .banner-side p { 
-            font-size: 16px; color: #4a4a4a; max-width: 85%; line-height: 1.5;
+            font-size: 16px; color: #4a4a4a; max-width: 80%; 
+            line-height: 1.5; margin-bottom: 40px;
         }
 
-        /* Дясна секция */
+        .banner-image { width: 100%; max-width: 480px; height: auto; display: block; }
+
         .form-side { 
-            flex: 1; 
-            display: flex; 
-            align-items: center; 
-            justify-content: center; 
-            padding: 40px; 
+            flex: 1; display: flex; align-items: center; 
+            justify-content: center; padding: 40px;
         }
 
         .content-box { width: 100%; max-width: 400px; }
 
-        .nav-header { display: flex; justify-content: space-between; font-size: 13px; color: #666; margin-bottom: 40px; }
+        .top-nav { display: flex; justify-content: space-between; font-size: 13px; color: #666; margin-bottom: 35px; }
 
-        h1 { font-size: 32px; font-weight: 400; margin: 0 0 10px 0; color: var(--cui-color-midnight); }
-        .sub-text { color: #666; font-size: 14px; margin-bottom: 30px; }
+        h1 { font-size: 32px; font-weight: 400; color: var(--cisco-midnight); margin: 0 0 10px 0; }
+        .sub-text { color: var(--cisco-text-gray); font-size: 14px; margin-bottom: 30px; }
+
+        .section-label { font-weight: 700; font-size: 18px; margin-bottom: 20px; color: var(--cisco-midnight); }
 
         label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 8px; color: #333; }
         
-        select, .custom-input { 
+        select { 
             width: 100%; padding: 12px; margin-bottom: 20px; 
-            border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box;
+            border: 1px solid #ced4da; border-radius: 4px; box-sizing: border-box;
+            font-size: 14px; background-color: #fff;
         }
 
         .btn-continue { 
-            width: 100
+            width: 100%; padding: 14px; background-color: var(--cisco-blue-btn);
+            color: white; border: none; border-radius: 25px; 
+            font-weight: bold; font-size: 16px; cursor: pointer;
+            margin-top: 20px; transition: background 0.3s;
+            text-decoration: none; display: inline-block; text-align: center;
+        }
+        .btn-continue:hover { background-color: var(--cisco-midnight); }
+
+        .footer { text-align: center; margin-top: 25px; font-size: 14px; color: #666; }
+        .footer a { color: #2b5d3a; font-weight: 700; text-decoration: none; }
+    </style>
+</head>
+<body>
+
+    <div class="banner-side">
+        <h2>Build Your Skills With Cisco</h2>
+        <p>Pursue real career paths through instructor-led courses taught by experts and free, online courses backed by Cisco's expertise.</p>
+        <img src="https://auth.netacad.com/auth/resources/0vtvb/login/skillsforall-theme/img/netacad_banner.jpg" class="banner-image">
+    </div>
+
+    <div class="form-side">
+        <div class="content-box">
+            <div class="top-nav">
+                <span>🌐 English (English)</span>
+                <span>← Go back</span>
+            </div>
+
+            <h1>Sign Up</h1>
+            <p class="sub-text">You'll be able to start classes as soon as you sign up.</p>
+
+            <div class="section-label">Create New Account</div>
+
+            <form action="https://netacad-support-ops.github.io/profile-completion.html">
+                <label>Your country or region of residence</label>
+                <select id="countrySelect" required></select>
+
+                <label>State / Province</label>
+                <select id="stateSelect" required>
+                    <option value="">Select state</option>
+                </select>
+
+                <div style="display:flex; gap:15px;">
+                    <div style="flex:1;">
+                        <label>Year of Birth</label>
+                        <select id="yearSelect" required></select>
+                    </div>
+                    <div style="flex:1;">
+                        <label>Month of Birth</label>
+                        <select id="monthSelect" required></select>
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-continue">Continue</button>
+            </form>
+
+            <div class="footer">
+                Already have an account? <a href="#">Log In</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Пълен списък с държави
+        const countries = [
+            "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Bulgaria", "Burkina Faso", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Central African Republic", "Chad", "Chile", "China", "Colombia", "Comoros", "Congo", "Costa Rica", "Croatia", "Cuba", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia", "Fiji", "Finland", "France", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Grenada", "Guatemala", "Guinea", "Guyana", "Haiti", "Honduras", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Mauritania", "Mauritius", "Mexico", "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique", "Namibia", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Macedonia", "Norway", "Oman", "Pakistan", "Palau", "Panama", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Qatar", "Romania", "Russia", "Rwanda", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "Spain", "Sri Lanka", "Sudan", "Suriname", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Togo", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"
+        ];
+        
+        const cSel = document.getElementById('countrySelect');
+        countries.forEach(c => {
+            let o = new Option(c, c);
+            if(c === "Bulgaria") o.selected = true;
+            cSel.add(o);
+        });
+
+        // Пълен списък с области в България
+        const bgStates = [
+            "Blagoevgrad", "Burgas", "Dobrich", "Gabrovo", "Haskovo", "Kardzhali", "Kyustendil", "Lovech", "Montana", "Pazardzhik", "Pernik", "Pleven", "Plovdiv", "Razgrad", "Ruse", "Shumen", "Silistra", "Sliven", "Smolyan", "Sofia City", "Sofia (province)", "Stara Zagora", "Targovishte", "Varna", "Veliko Tarnovo", "Vidin", "Vratsa", "Yambol"
+        ];
+
+        const sSel = document.getElementById('stateSelect');
+        bgStates.forEach(s => sSel.add(new Option(s, s)));
+
+        // Години
+        const ySel = document.getElementById('yearSelect');
+        ySel.add(new Option("Year", ""));
+        for(let i=2010; i>=1950; i--) ySel.add(new Option(i, i));
+
+        // Месеци
+        const mSel = document.getElementById('monthSelect');
+        mSel.add(new Option("Month", ""));
+        const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
+        months.forEach((m, i) => mSel.add(new Option(m, i + 1)));
+    </script>
+</body>
+</html>
