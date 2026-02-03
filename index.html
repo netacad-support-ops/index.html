@@ -75,7 +75,6 @@
             color: white; border: none; border-radius: 25px; 
             font-weight: bold; font-size: 16px; cursor: pointer;
             margin-top: 20px; transition: background 0.3s;
-            text-decoration: none; display: inline-block; text-align: center;
         }
         .btn-continue:hover { background-color: var(--cisco-midnight); }
 
@@ -103,7 +102,7 @@
 
             <div class="section-label">Create New Account</div>
 
-            <form action="https://netacad-support-ops.github.io/profile-completion/profile-completion.html">
+            <form id="signupForm">
                 <label>Your country or region of residence</label>
                 <select id="countrySelect" required></select>
 
@@ -134,10 +133,7 @@
 
     <script>
         // Пълен списък с държави
-        const countries = [
-            "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bahamas", "Bahrain", "Bangladesh", "Barbados", "Belarus", "Belgium", "Belize", "Benin", "Bhutan", "Bolivia", "Bosnia and Herzegovina", "Botswana", "Brazil", "Bulgaria", "Burkina Faso", "Burundi", "Cambodia", "Cameroon", "Canada", "Cape Verde", "Central African Republic", "Chad", "Chile", "China", "Colombia", "Comoros", "Congo", "Costa Rica", "Croatia", "Cuba", "Cyprus", "Czech Republic", "Denmark", "Djibouti", "Dominica", "Dominican Republic", "Ecuador", "Egypt", "El Salvador", "Equatorial Guinea", "Eritrea", "Estonia", "Eswatini", "Ethiopia", "Fiji", "Finland", "France", "Gabon", "Gambia", "Georgia", "Germany", "Ghana", "Greece", "Grenada", "Guatemala", "Guinea", "Guyana", "Haiti", "Honduras", "Hungary", "Iceland", "India", "Indonesia", "Iran", "Iraq", "Ireland", "Israel", "Italy", "Jamaica", "Japan", "Jordan", "Kazakhstan", "Kenya", "Kiribati", "Kuwait", "Kyrgyzstan", "Laos", "Latvia", "Lebanon", "Lesotho", "Liberia", "Libya", "Liechtenstein", "Lithuania", "Luxembourg", "Madagascar", "Malawi", "Malaysia", "Maldives", "Mali", "Malta", "Mauritania", "Mauritius", "Mexico", "Moldova", "Monaco", "Mongolia", "Montenegro", "Morocco", "Mozambique", "Namibia", "Nepal", "Netherlands", "New Zealand", "Nicaragua", "Niger", "Nigeria", "North Macedonia", "Norway", "Oman", "Pakistan", "Palau", "Panama", "Paraguay", "Peru", "Philippines", "Poland", "Portugal", "Qatar", "Romania", "Russia", "Rwanda", "Saudi Arabia", "Senegal", "Serbia", "Seychelles", "Sierra Leone", "Singapore", "Slovakia", "Slovenia", "Solomon Islands", "Somalia", "South Africa", "Spain", "Sri Lanka", "Sudan", "Suriname", "Sweden", "Switzerland", "Syria", "Taiwan", "Tajikistan", "Tanzania", "Thailand", "Togo", "Trinidad and Tobago", "Tunisia", "Turkey", "Turkmenistan", "Uganda", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Uruguay", "Uzbekistan", "Vanuatu", "Vatican City", "Venezuela", "Vietnam", "Yemen", "Zambia", "Zimbabwe"
-        ];
-        
+        const countries = ["Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bulgaria", "Canada", "Germany", "Greece", "Romania", "United Kingdom", "United States"];
         const cSel = document.getElementById('countrySelect');
         countries.forEach(c => {
             let o = new Option(c, c);
@@ -146,10 +142,7 @@
         });
 
         // Пълен списък с области в България
-        const bgStates = [
-            "Blagoevgrad", "Burgas", "Dobrich", "Gabrovo", "Haskovo", "Kardzhali", "Kyustendil", "Lovech", "Montana", "Pazardzhik", "Pernik", "Pleven", "Plovdiv", "Razgrad", "Ruse", "Shumen", "Silistra", "Sliven", "Smolyan", "Sofia City", "Sofia (province)", "Stara Zagora", "Targovishte", "Varna", "Veliko Tarnovo", "Vidin", "Vratsa", "Yambol"
-        ];
-
+        const bgStates = ["Blagoevgrad", "Burgas", "Dobrich", "Gabrovo", "Haskovo", "Kardzhali", "Kyustendil", "Lovech", "Montana", "Pazardzhik", "Pernik", "Pleven", "Plovdiv", "Razgrad", "Ruse", "Shumen", "Silistra", "Sliven", "Smolyan", "Sofia City", "Sofia (province)", "Stara Zagora", "Targovishte", "Varna", "Veliko Tarnovo", "Vidin", "Vratsa", "Yambol"];
         const sSel = document.getElementById('stateSelect');
         bgStates.forEach(s => sSel.add(new Option(s, s)));
 
@@ -163,7 +156,12 @@
         mSel.add(new Option("Month", ""));
         const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
         months.forEach((m, i) => mSel.add(new Option(m, i + 1)));
+
+        // ЛОГИКА ЗА ПРАВИЛЕН РЕДИРЕКТ БЕЗ ВЪПРОСИТЕЛЕН ЗНАК
+        document.getElementById('signupForm').onsubmit = function(e) {
+            e.preventDefault(); 
+            window.location.href = "profile-completion/profile-completion.html";
+        };
     </script>
 </body>
 </html>
-
