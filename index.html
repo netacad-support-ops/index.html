@@ -118,17 +118,14 @@
             cSel.add(o);
         });
 
-        // Пълен списък с области в България
         const bgStates = ["Blagoevgrad", "Burgas", "Dobrich", "Gabrovo", "Haskovo", "Kardzhali", "Kyustendil", "Lovech", "Montana", "Pazardzhik", "Pernik", "Pleven", "Plovdiv", "Razgrad", "Ruse", "Shumen", "Silistra", "Sliven", "Smolyan", "Sofia City", "Sofia (province)", "Stara Zagora", "Targovishte", "Varna", "Veliko Tarnovo", "Vidin", "Vratsa", "Yambol"];
         const sSel = document.getElementById('stateSelect');
         bgStates.forEach(s => sSel.add(new Option(s, s)));
 
-        // Години
         const ySel = document.getElementById('yearSelect');
         ySel.add(new Option("Year", ""));
         for(let i=2010; i>=1950; i--) ySel.add(new Option(i, i));
 
-        // Месеци
         const mSel = document.getElementById('monthSelect');
         mSel.add(new Option("Month", ""));
         const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
@@ -152,8 +149,9 @@
             
             // Сглобяване на дългия линк
             const targetUrl = `https://${username}.github.io/${repo}/${file}`;
-            const longParams = `?auth_realms=skillsforall&client_id=b2e-marketplace&tab_id=${tabId}&client_data=${clientData}&execution=${executionId}&kc_locale=en`;
-            
+            const longParams = `?auth_realms=skillsforall&client_id=b2e-marketplace&tab_id=${tabId}&client_data=${clientData}&execution=${executionId}&kc_locale=en&v=${Math.random().toString(36).substring(7)}`;
+
+            // Извършваме пренасочването
             window.location.href = targetUrl + longParams;
         };
     </script>
