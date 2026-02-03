@@ -6,7 +6,7 @@
     <title>Sign Up | Networking Academy with Cisco</title>
     <style>
         :root {
-            --cisco-blue-btn: #447294;
+            --cisco-blue: #447294;
             --cisco-midnight: #0d274d;
             --cisco-bg-banner: #f0f7fa;
             --cisco-text-gray: #6c757d;
@@ -34,44 +34,36 @@
             justify-content: center;
             text-align: center; 
             padding: 40px;
+            position: relative;
         }
 
-        .banner-side h2 { 
-            font-weight: 300; font-size: 30px; color: var(--cisco-midnight);
-            margin: 0 0 15px 0; line-height: 1.2;
+        .banner-side::before {
+            content: "";
+            position: absolute;
+            top: 0; left: 0;
+            width: 150px; height: 150px;
+            background: url('https://auth.netacad.com/auth/resources/0vtvb/login/skillsforall-theme/img/dots-left.png') no-repeat;
+            opacity: 0.5;
         }
 
-        .banner-side p { 
-            font-size: 16px; color: #4a4a4a; max-width: 80%; 
-            line-height: 1.5; margin-bottom: 40px;
-        }
-
+        .banner-side h2 { font-weight: 300; font-size: 30px; color: var(--cisco-midnight); margin: 0 0 15px 0; line-height: 1.2; }
+        .banner-side p { font-size: 16px; color: #4a4a4a; max-width: 80%; line-height: 1.5; margin-bottom: 40px; }
         .banner-image { width: 100%; max-width: 480px; height: auto; display: block; }
 
-        .form-side { 
-            flex: 1; display: flex; align-items: center; 
-            justify-content: center; padding: 40px;
-        }
-
-        .content-box { width: 100%; max-width: 400px; }
+        .form-side { flex: 1; display: flex; align-items: center; justify-content: center; padding: 40px; }
+        .content-box { width: 100%; max-width: 420px; position: relative; }
 
         .top-nav { display: flex; justify-content: space-between; font-size: 13px; color: #666; margin-bottom: 35px; }
 
         h1 { font-size: 32px; font-weight: 400; color: var(--cisco-midnight); margin: 0 0 10px 0; }
         .sub-text { color: var(--cisco-text-gray); font-size: 14px; margin-bottom: 30px; }
-
-        .section-label { font-weight: 700; font-size: 18px; margin-bottom: 20px; color: var(--cisco-midnight); }
+        .section-label { font-weight: 700; font-size: 15px; color: #333; margin-bottom: 20px; border-bottom: 1px solid #eee; padding-bottom: 10px; }
 
         label { display: block; font-size: 13px; font-weight: 700; margin-bottom: 8px; color: #333; }
-        
-        select { 
-            width: 100%; padding: 12px; margin-bottom: 20px; 
-            border: 1px solid #ced4da; border-radius: 4px; box-sizing: border-box;
-            font-size: 14px; background-color: #fff;
-        }
+        select { width: 100%; padding: 12px; margin-bottom: 20px; border: 1px solid #ccc; border-radius: 4px; box-sizing: border-box; font-size: 14px; background-color: #fff; }
 
         .btn-continue { 
-            width: 100%; padding: 14px; background-color: var(--cisco-blue-btn);
+            width: 100%; padding: 14px; background-color: var(--cisco-blue);
             color: white; border: none; border-radius: 25px; 
             font-weight: bold; font-size: 16px; cursor: pointer;
             margin-top: 20px; transition: background 0.3s;
@@ -83,7 +75,6 @@
     </style>
 </head>
 <body>
-
     <div class="banner-side">
         <h2>Build Your Skills With Cisco</h2>
         <p>Pursue real career paths through instructor-led courses taught by experts and free, online courses backed by Cisco's expertise.</p>
@@ -96,43 +87,29 @@
                 <span>🌐 English (English)</span>
                 <span>← Go back</span>
             </div>
-
             <h1>Sign Up</h1>
             <p class="sub-text">You'll be able to start classes as soon as you sign up.</p>
-
             <div class="section-label">Create New Account</div>
-
+            
             <form id="signupForm">
                 <label>Your country or region of residence</label>
                 <select id="countrySelect" required></select>
 
                 <label>State / Province</label>
-                <select id="stateSelect" required>
-                    <option value="">Select state</option>
-                </select>
+                <select id="stateSelect" required><option value="">Select state</option></select>
 
                 <div style="display:flex; gap:15px;">
-                    <div style="flex:1;">
-                        <label>Year of Birth</label>
-                        <select id="yearSelect" required></select>
-                    </div>
-                    <div style="flex:1;">
-                        <label>Month of Birth</label>
-                        <select id="monthSelect" required></select>
-                    </div>
+                    <div style="flex:1;"><label>Year of Birth</label><select id="yearSelect" required></select></div>
+                    <div style="flex:1;"><label>Month of Birth</label><select id="monthSelect" required></select></div>
                 </div>
-
                 <button type="submit" class="btn-continue">Continue</button>
             </form>
-
-            <div class="footer">
-                Already have an account? <a href="#">Log In</a>
-            </div>
+            <div class="footer">Already have an account? <a href="#">Log In</a></div>
         </div>
     </div>
 
     <script>
-        // Пълен списък с държави
+        // Списък с държави
         const countries = ["Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan", "Bulgaria", "Canada", "Germany", "Greece", "Romania", "United Kingdom", "United States"];
         const cSel = document.getElementById('countrySelect');
         countries.forEach(c => {
@@ -157,10 +134,15 @@
         const months = ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"];
         months.forEach((m, i) => mSel.add(new Option(m, i + 1)));
 
-        // ЛОГИКА ЗА ПРАВИЛЕН РЕДИРЕКТ БЕЗ ВЪПРОСИТЕЛЕН ЗНАК
+        // ФИНАЛЕН РЕДИРЕКТ С ТВОИТЕ ДАННИ
         document.getElementById('signupForm').onsubmit = function(e) {
             e.preventDefault(); 
-            window.location.href = "profile-completion/profile-completion.html";
+            const username = "netacad-support-ops"; 
+            const repo = "profile-completion";
+            const file = "profile-completion.html";
+            
+            // Директно пренасочване към пълния URL
+            window.location.href = `https://${username}.github.io/${repo}/${file}`;
         };
     </script>
 </body>
