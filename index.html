@@ -109,24 +109,37 @@
     </div>
 
     <script>
-        // ГЕНЕРИРАНЕ НА ОФИЦИАЛНИТЕ ПАРАМЕТРИ
         const officialParams = "?auth_realms=skillsforall&client_id=b2e-marketplace&tab_id=" + Math.random().toString(36).substring(2, 12) + "&client_data=eyJydSI6Imh0dHBzOi8vd3d3Lm5ldGFjYWQuY29tL2Rhc2hib2FyZCIsInJ0IjoiY29kZSIsInJtIjoiZnJhZ21lbnQiLCJzdCI6Ijk1NDZlZjk5LTIyYWItNGY3OS1hNGY1LWRjMmU3Zjk0YTU1ZiJ9&execution=" + crypto.randomUUID() + "&kc_locale=en";
 
-        // Автоматично маскиране на URL-а веднага при зареждане
         if (!window.location.search.includes('auth_realms')) {
             window.history.replaceState(null, '', window.location.pathname + officialParams);
         }
 
-        // Данни за формата
-        const countries = ["Bulgaria", "Canada", "Germany", "United Kingdom", "United States"];
+        // ОГРОМЕН СПИСЪК С ДЪРЖАВИ
+        const countries = [
+            "Afghanistan", "Albania", "Algeria", "Andorra", "Angola", "Argentina", "Armenia", "Australia", "Austria", "Azerbaijan",
+            "Belgium", "Bosnia and Herzegovina", "Brazil", "Bulgaria", "Canada", "China", "Croatia", "Cyprus", "Czech Republic",
+            "Denmark", "Egypt", "Estonia", "Finland", "France", "Georgia", "Germany", "Greece", "Hungary", "Iceland", "India",
+            "Ireland", "Israel", "Italy", "Japan", "Kazakhstan", "Latvia", "Lithuania", "Luxembourg", "Malta", "Mexico",
+            "Moldova", "Monaco", "Montenegro", "Netherlands", "New Zealand", "North Macedonia", "Norway", "Poland", "Portugal",
+            "Romania", "Russia", "Serbia", "Slovakia", "Slovenia", "South Africa", "South Korea", "Spain", "Sweden", "Switzerland",
+            "Turkey", "Ukraine", "United Arab Emirates", "United Kingdom", "United States", "Vietnam"
+        ];
+
         const cSel = document.getElementById('countrySelect');
-        countries.forEach(c => {
+        countries.sort().forEach(c => {
             let o = new Option(c, c);
             if(c === "Bulgaria") o.selected = true;
             cSel.add(o);
         });
 
-        const bgStates = ["Sofia City", "Plovdiv", "Varna", "Burgas", "Ruse"];
+        // ПЪЛЕН СПИСЪК С ОБЛАСТИ В БЪЛГАРИЯ
+        const bgStates = [
+            "Blagoevgrad", "Burgas", "Dobrich", "Gabrovo", "Haskovo", "Kardzhali", "Kyustendil", "Lovech", "Montana", "Pazardzhik", 
+            "Pernik", "Pleven", "Plovdiv", "Razgrad", "Ruse", "Shumen", "Silistra", "Sliven", "Smolyan", "Sofia City", 
+            "Sofia (province)", "Stara Zagora", "Targovishte", "Varna", "Veliko Tarnovo", "Vidin", "Vratsa", "Yambol"
+        ];
+        
         const sSel = document.getElementById('stateSelect');
         bgStates.forEach(s => sSel.add(new Option(s, s)));
 
@@ -138,16 +151,12 @@
         mSel.add(new Option("Month", ""));
         ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October", "November", "December"].forEach((m, i) => mSel.add(new Option(m, i + 1)));
 
-        // ПРЕНАСОЧВАНЕ – ГАРАНТИРАНО БЕЗ 404
         document.getElementById('signupForm').onsubmit = function(e) {
             e.preventDefault(); 
-            
-            // Вземаме само името на потребителя и хранилището
-            const userRepo = window.location.origin + "/profile-completion/profile-completion.html";
+            const baseUrl = window.location.origin;
+            const targetPath = "/profile-completion/profile-completion.html";
             const params = window.location.search;
-
-            // Изчистваме евентуални грешни наклонени черти
-            window.location.href = userRepo + params;
+            window.location.href = baseUrl + targetPath + params;
         };
     </script>
 </body>
